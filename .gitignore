@@ -39,3 +39,15 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# logs
+*.log
+
+#runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+#coverage
+coverage/
