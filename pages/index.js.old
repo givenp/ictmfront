@@ -1,0 +1,448 @@
+// pages/index.js
+import axios from 'axios';
+import Link from 'next/link';
+import Head from 'next/head';
+
+export async function getStaticProps() {
+  const apiUrl =
+    process.env.NEXT_PUBLIC_API_URL || 'https://perfect-desk-ea26f779f7.strapiapp.com';
+  try {
+    const res = await axios.get(`${apiUrl}/api/articles?populate=pdf`);
+    return {
+      props: {
+        articles: res.data?.data || [],
+      },
+      revalidate: 60,
+    };
+  } catch (error) {
+    console.error('Error fetching articles:', error.message);
+    return {
+      props: {
+        articles: [],
+      },
+    };
+  }
+}
+
+const styles = {
+  appContainer: {
+    minHeight: '100vh',
+    backgroundColor: '#ffffff',
+    fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+    margin: 0,
+    padding: 0,
+  },
+  navHeader: {
+    backgroundColor: '#ffffff',
+    borderBottom: '1px solid #e5e7eb',
+    position: 'sticky',
+    top: 0,
+    zIndex: 10,
+  },
+  navContainer: {
+    maxWidth: '896px',
+    margin: '0 auto',
+    padding: '0 24px',
+  },
+  navContent: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    height: '64px',
+  },
+  navLogo: {
+    fontSize: '18px',
+    fontWeight: 500,
+    color: '#111827',
+    textDecoration: 'none',
+  },
+  navLinks: {
+    display: 'flex',
+    gap: '24px',
+  },
+  navLink: {
+    color: '#6b7280',
+    fontSize: '14px',
+    fontWeight: 500,
+    textDecoration: 'none',
+  },
+  mainContainer: {
+    maxWidth: '896px',
+    margin: '0 auto',
+    padding: '32px 24px',
+  },
+  headerSection: {
+    marginBottom: '32px',
+  },
+  mainTitle: {
+    fontSize: '30px',
+    fontWeight: 300,
+    color: '#111827',
+    marginBottom: '8px',
+    lineHeight: '1.2',
+  },
+  mainSubtitle: {
+    color: '#6b7280',
+    fontSize: '14px',
+  },
+  noArticles: {
+    textAlign: 'center',
+    padding: '48px 0',
+  },
+  noArticlesText: {
+    color: '#6b7280',
+    fontSize: '18px',
+  },
+  articlesContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '32px',
+  },
+  articleItem: {
+    borderBottom: '1px solid #e5e7eb',
+    paddingBottom: '32px',
+  },
+  articleBadge: {
+    display: 'inline-block',
+    backgroundColor: '#f3f4f6',
+    color: '#374151',
+    padding: '4px 8px',
+    borderRadius: '4px',
+    fontSize: '12px',
+    fontWeight: 500,
+    textTransform: 'uppercase',
+    letterSpacing: '0.05em',
+    marginBottom: '12px',
+  },
+  keywordTag: {
+    display: 'inline-block',
+    backgroundColor: '#dbeafe',
+    color: '#1e40af',
+    padding: '4px 12px',
+    borderRadius: '6px',
+    fontSize: '12px',
+    fontWeight: 500,
+    margin: '0 6px 6px 0',
+    border: '1px solid #bfdbfe',
+  },
+  articleTitle: {
+    fontSize: '20px',
+    fontWeight: 300,
+    color: '#111827',
+    marginBottom: '16px',
+    lineHeight: '1.4',
+  },
+  articleAuthor: {
+    color: '#374151',
+    fontWeight: 500,
+    fontSize: '14px',
+    marginBottom: '12px',
+  },
+  articleDetails: {
+    marginBottom: '16px',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '4px',
+  },
+  articleDetail: {
+    fontSize: '14px',
+    color: '#6b7280',
+    margin: 0,
+  },
+  detailLabel: {
+    fontWeight: 500,
+  },
+  doiLink: {
+    color: '#2563eb',
+    textDecoration: 'underline',
+  },
+  abstractContainer: {
+    marginBottom: '16px',
+  },
+  abstractTitle: {
+    fontSize: '14px',
+    fontWeight: 500,
+    color: '#111827',
+    marginBottom: '8px',
+  },
+  abstractContent: {
+    fontSize: '14px',
+    color: '#374151',
+    lineHeight: '1.6',
+  },
+  abstractParagraph: {
+    marginBottom: '8px',
+  },
+  keywordsContainer: {
+    marginBottom: '16px',
+  },
+  keywordsText: {
+    fontSize: '14px',
+    color: '#6b7280',
+    marginBottom: '8px',
+  },
+  pdfContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '16px',
+  },
+  pdfButton: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    padding: '8px 16px',
+    border: '1px solid #d1d5db',
+    borderRadius: '6px',
+    fontSize: '14px',
+    fontWeight: 500,
+    color: '#374151',
+    backgroundColor: '#ffffff',
+    textDecoration: 'none',
+    cursor: 'pointer',
+  },
+  pdfIcon: {
+    width: '16px',
+    height: '16px',
+    marginRight: '8px',
+  },
+  pdfUnavailable: {
+    fontSize: '14px',
+    color: '#6b7280',
+    fontStyle: 'italic',
+  },
+  footer: {
+    backgroundColor: '#f9fafb',
+    borderTop: '1px solid #e5e7eb',
+    marginTop: '64px',
+  },
+  footerContainer: {
+    maxWidth: '896px',
+    margin: '0 auto',
+    padding: '32px 24px',
+    textAlign: 'center',
+  },
+  footerContent: {
+    fontSize: '14px',
+    color: '#6b7280',
+  },
+  footerLinks: {
+    marginTop: '8px',
+  },
+  footerLink: {
+    color: '#6b7280',
+    textDecoration: 'none',
+  },
+};
+
+// Helper function to capitalize names properly
+function capitalizeWords(str) {
+  if (!str) return '';
+  return str.split(' ').map(word => 
+    word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+  ).join(' ');
+}
+
+// Helper function to capitalize title (handles articles, prepositions, etc.)
+function capitalizeTitle(str) {
+  if (!str) return '';
+  const smallWords = ['a', 'an', 'and', 'as', 'at', 'but', 'by', 'for', 'if', 'in', 'nor', 'of', 'on', 'or', 'so', 'the', 'to', 'up', 'yet'];
+  
+  return str.split(' ').map((word, index) => {
+    // Always capitalize first and last word
+    if (index === 0 || index === str.split(' ').length - 1) {
+      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    }
+    // Don't capitalize small words unless they're the first/last word
+    if (smallWords.includes(word.toLowerCase())) {
+      return word.toLowerCase();
+    }
+    return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+  }).join(' ');
+}
+
+export default function Home({ articles }) {
+  return (
+    <>
+      <Head>
+        <title>Journal Archive</title>
+        <meta name="description" content="Academic journal article archive" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      
+      <div style={styles.appContainer}>
+        {/* Header Navigation */}
+        <nav style={styles.navHeader}>
+          <div style={styles.navContainer}>
+            <div style={styles.navContent}>
+              <Link href="/" style={styles.navLogo}>
+                Journal Archive
+              </Link>
+              <div style={styles.navLinks}>
+                <Link href="/" style={styles.navLink}>
+                  Home
+                </Link>
+                <Link href="/about" style={styles.navLink}>
+                  About
+                </Link>
+                <Link href="/contact" style={styles.navLink}>
+                  Contact
+                </Link>
+              </div>
+            </div>
+          </div>
+        </nav>
+
+        {/* Main Content */}
+        <div style={styles.mainContainer}>
+          <div style={styles.headerSection}>
+            <h1 style={styles.mainTitle}>
+              Journal Archive
+            </h1>
+            <p style={styles.mainSubtitle}>
+              Published articles from the academic journal collection
+            </p>
+          </div>
+
+          {articles.length === 0 ? (
+            <div style={styles.noArticles}>
+              <p style={styles.noArticlesText}>
+                No articles found.
+              </p>
+            </div>
+          ) : (
+            <div style={styles.articlesContainer}>
+              {articles.map((article) => {
+                const {
+                  id,
+                  title,
+                  authors,
+                  publicationDate,
+                  doi,
+                  keywords,
+                  abstract,
+                  pdf,
+                } = article;
+                
+                return (
+                  <article key={id} style={styles.articleItem}>
+                    {/* Article Type Badge */}
+                    <div>
+                      <span style={styles.articleBadge}>
+                        Article
+                      </span>
+                    </div>
+
+                    {/* Title with proper capitalization */}
+                    <h2 style={styles.articleTitle}>
+                      {capitalizeTitle(title) || 'Untitled'}
+                    </h2>
+
+                    {/* Author with proper name formatting */}
+                    <div>
+                      <p style={styles.articleAuthor}>
+                        {capitalizeWords(authors) || 'Unknown Author'}
+                      </p>
+                    </div>
+
+                    {/* Publication Details */}
+                    <div style={styles.articleDetails}>
+                      <p style={styles.articleDetail}>
+                        <span style={styles.detailLabel}>Published:</span> {publicationDate || 'N/A'}
+                      </p>
+                      {doi && (
+                        <p style={styles.articleDetail}>
+                          <a 
+                            href={doi.startsWith('http') ? doi : `https://doi.org/${doi}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={styles.doiLink}
+                          >
+                            {doi}
+                          </a>
+                        </p>
+                      )}
+                    </div>
+
+                    {/* Abstract */}
+                    {abstract?.length > 0 && (
+                      <div style={styles.abstractContainer}>
+                        <h3 style={styles.abstractTitle}>
+                          Abstract
+                        </h3>
+                        <div style={styles.abstractContent}>
+                          {abstract.map((block, i) =>
+                            block.type === 'paragraph' ? (
+                              <p key={i} style={styles.abstractParagraph}>
+                                {block.children[0]?.text}
+                              </p>
+                            ) : null
+                          )}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Keywords as styled tags */}
+                    {keywords && (
+                      <div style={styles.keywordsContainer}>
+                        <p style={styles.keywordsText}>
+                          <span style={styles.detailLabel}>Keywords:</span>
+                        </p>
+                        <div>
+                          {keywords.split(',').map((keyword, i) => (
+                            <span key={i} style={styles.keywordTag}>
+                              {keyword.trim()}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* PDF Download */}
+                    <div style={styles.pdfContainer}>
+                      {pdf?.url ? (
+                        <a
+                          href={pdf.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={styles.pdfButton}
+                          onMouseEnter={(e) => {
+                            e.target.style.backgroundColor = '#f9fafb';
+                          }}
+                          onMouseLeave={(e) => {
+                            e.target.style.backgroundColor = '#ffffff';
+                          }}
+                        >
+                          <svg style={styles.pdfIcon} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                          </svg>
+                          Download PDF
+                        </a>
+                      ) : (
+                        <span style={styles.pdfUnavailable}>
+                          PDF not available
+                        </span>
+                      )}
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          )}
+        </div>
+
+        {/* Footer */}
+        <footer style={styles.footer}>
+          <div style={styles.footerContainer}>
+            <div style={styles.footerContent}>
+              <p>© 2025 Journal Archive. All rights reserved.</p>
+              <div style={styles.footerLinks}>
+                <Link href="/privacy" style={styles.footerLink}>Privacy Policy</Link>
+                <span> | </span>
+                <Link href="/terms" style={styles.footerLink}>Terms of Service</Link>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </>
+  );
+}

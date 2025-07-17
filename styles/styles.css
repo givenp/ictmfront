@@ -1,0 +1,153 @@
+/* styles.css */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: #f9fafb;
+  color: #111827;
+}
+
+nav {
+  background-color: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.nav-container {
+  max-width: 896px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 64px;
+}
+
+.nav-logo {
+  font-size: 18px;
+  font-weight: 500;
+  color: #111827;
+  text-decoration: none;
+}
+
+.nav-links a {
+  color: #6b7280;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  margin-left: 24px;
+}
+
+.main-container {
+  max-width: 896px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+
+h1 {
+  font-size: 30px;
+  font-weight: 300;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  color: #6b7280;
+  font-size: 14px;
+  margin-bottom: 32px;
+}
+
+.article {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 32px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.badge {
+  display: inline-block;
+  background-color: #f3f4f6;
+  color: #374151;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 12px;
+}
+
+.article-title {
+  font-size: 20px;
+  font-weight: 500;
+  margin: 12px 0;
+}
+
+.article-author,
+.article-detail {
+  color: #374151;
+  font-size: 14px;
+  margin: 4px 0;
+}
+
+.abstract-title {
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 16px;
+}
+
+.abstract-content {
+  font-size: 14px;
+  color: #374151;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.keyword-tag {
+  display: inline-block;
+  background-color: #dbeafe;
+  color: #1e40af;
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  margin: 0 6px 6px 0;
+  border: 1px solid #bfdbfe;
+}
+
+.pdf-button {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  background-color: #ffffff;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.pdf-button:hover {
+  background-color: #f9fafb;
+}
+
+.footer {
+  background-color: #f9fafb;
+  border-top: 1px solid #e5e7eb;
+  margin-top: 64px;
+  padding: 32px 24px;
+  text-align: center;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.footer a {
+  color: #6b7280;
+  text-decoration: none;
+}
